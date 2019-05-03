@@ -73,7 +73,7 @@ class Quadrotor:
         # acceleration - Newton's second law of motion
         accel = 1.0 / params.mass * (wRb.dot(np.array([[0, 0, F]]).T)
                                      - np.array([[0, 0, params.mass * params.g]]).T)
-        # angular velocity - using quternion
+        # angular velocity - using quaternion
         # http://www.euclideanspace.com/physics/kinematics/angularvelocity/
         K_quat = 2.0;  # this enforces the magnitude 1 constraint for the quaternion
         quaterror = 1.0 - (qw ** 2 + qx ** 2 + qy ** 2 + qz ** 2)
@@ -105,7 +105,7 @@ class Quadrotor:
 
     def update(self, dt, F, M):
         # limit thrust and Moment
-        L = params.arm_length
+        L = params.L
         r = params.r
         prop_thrusts = params.invA.dot(np.r_[np.array([[F]]), M])
         prop_thrusts_clamped = np.maximum(np.minimum(prop_thrusts, params.maxF / 4), params.minF / 4)
