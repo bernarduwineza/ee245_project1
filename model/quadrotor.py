@@ -27,12 +27,12 @@ class Quadrotor:
         roll, pitch, yaw = attitude
         #TODO
 
-    def world_frame (self):
+    def world_frame(self):
         """
 
         :return: world_frame
         """
 
         #TODO
-        
+
 
