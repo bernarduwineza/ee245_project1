@@ -59,31 +59,37 @@ def vertical_hover(t):
     return FinalState(pos, vel, acc, yaw, yawdot)
 
 
-def straight_line(t, init_pos, final_pos):
+def straight_line(vel, init_pos, final_pos):
     """
     A straight line in the yz- plane.  Done in constant velocity.
-    :param t: time to accomplish this
+    :param vel: velocity
     :param init_pos: initial position
     :param final_pos: final position
     :return: position (pos), velocity (vel), acceleration (acc), yaw(yaw), yawdot
     """
 
-    dt = t
-    v_max = 2.0
-    a_max = 2.0
+    acc = np.zeros (3)
     yaw = 1.0
     yawdot = 1.0
 
-    vel = (final_pos - init_pos)/dt
-    acc = (final_pos - init_pos)/dt ** 2
+    p = (final_pos[2] - init_pos[2])/vel [2]
+    #acc = (final_pos[2] - init_pos[2])/dt ** 2
 
     # constant velocity
-    pos = np.array([])
+    pos = init_pos + np.array([0, 0, p])
     FinalState = namedtuple('FinalState', 'pos vel acc yaw yawdot')
     return FinalState(pos, vel, acc, yaw, yawdot)
 
+def vert_waypoints(t, n):
+    """
+    :param t: time to get there
+    :param n: number of points
+    :return: positions of the waypoints
+    """
+    waypoints = np.linspace(t, t + 2*np.pi, n)
+    x = waypoints * 0
+    y = waypoints * 0
+    z = waypoints
 
-
-
-
+    return np.stack((x, y, z), axis=-1)
 

@@ -85,7 +85,7 @@ class Quadrotor:
         # angular acceleration - Euler's equation of motion
         # https://en.wikipedia.org/wiki/Euler%27s_equations_(rigid_body_dynamics)
         omega = np.array([p, q, r])
-        pqrdot = params.invI.dot(M.flatten() - np.cross(omega, params.I.dot(omega)))
+        pqrdot = params.invI.dot(M.flatten() - np.cross(omega, params.Ib.dot(omega)))
         state_dot = np.zeros(13)
         state_dot[0] = xdot
         state_dot[1] = ydot
