@@ -5,8 +5,9 @@ import numpy as np
 from  scipy import integrate
 g = 9.81
 
-class model:
-    def control_2d (self, q0, qh, zt, T):
+
+class Model:
+    def control_2d(self, q0, qh, zt, T):
         """
 
         :param q0: initial pose
@@ -24,7 +25,7 @@ class model:
         p_zt = np.array([q0[0],[zt]])
         X1 = self.dynamic_2d(q0, p_zt, kd, kp)
 
-        #straight line
+        #s traight line
         p_l = X1[:2, -1].reshape(2,1)
         X2 = self.dynamic_2d(p_l, qh, kd, kp)
 
@@ -38,7 +39,6 @@ class model:
         X_2d = np.concatenate((X1, X2, X3, X4), axis=1)
 
         return X_2d, dt
-
 
     def control_3d (self,  q0, qh, zt, T):
         """
@@ -72,7 +72,6 @@ class model:
 
         return X_3d, dt
 
-
     def dynamic_2d (self, p0, pf, kd, kp):
         """
 
@@ -84,7 +83,7 @@ class model:
         """
         g = 9.81
 
-        #delta of the displacement and its norm
+        # delta of the displacement and its norm
         dp = pf - p0
         d = np.linalg.norm(dp)
         dp = dp.reshape(dp.shape[0])
@@ -108,7 +107,6 @@ class model:
 
         return X_2D
 
-
     def dynamic_3d (self, p0, pf, kd, kp):
         """
 
@@ -119,7 +117,7 @@ class model:
         :return: 3D pose
         """
 
-        #delta of the displacement and its norm
+        # delta of the displacement and its norm
         dp = pf - p0
         d = np.linalg.norm(dp)
         d_xy = np.linalg.norm(dp[:2])
@@ -161,11 +159,9 @@ class model:
         yaw = np.zeros((1, roll.shape[1]))
         yaw_dot = np.zeros((1, roll.shape[1]))
 
-
         X_3D = np.concatenate((px, py, pz, pitch, roll, yaw, vx, vy, vz, pitch_dot, roll_dot, yaw_dot), axis=0)
 
         return X_3D
-
 
     def hover (self, ph, t, dt):
         """
