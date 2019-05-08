@@ -1,13 +1,17 @@
 """
 The model of the quadrotor
+
+authors: Jean-bernard Uwineza & Zhao Hangquan
 """
 import numpy as np
-from  scipy import integrate
+from scipy import integrate
 g = 9.81
 
 
 class Controller:
-    def control_2d(self, q0, qh, zt, T):
+
+    @staticmethod
+    def control_2d(q0, qh, zt, T):
         """
 
         :param q0: initial pose
@@ -40,7 +44,8 @@ class Controller:
 
         return X_2d, dt
 
-    def control_3d (self,  q0, qh, zt, T):
+    @staticmethod
+    def control_3d(q0, qh, zt, T):
         """
 
         :param q0: initial pose
@@ -58,15 +63,15 @@ class Controller:
         X1 = Model.dynamic_3d(q0, p_zt, kd, kp)
 
         # straight line
-        p_l = X1[:3, -1].reshape(3,1)
+        p_l = X1[:3, -1].reshape(3, 1)
         X2 = Model.dynamic_3d(p_l, qh, kd, kp)
 
         # hover
-        X3 = Maneuver.hover(X2[:,-1], T, dt)
+        X3 = Maneuver.hover(X2[:, -1], T, dt)
 
         # vertical landing on the z-axis
         p_land = np.array([qh[0], qh[1], [0.0]])
-        p_zl = X3[:3,-1].reshape(3,1)
+        p_zl = X3[:3, -1].reshape(3, 1)
         X4 = Model.dynamic_3d(p_zl, p_land, kd, kp)
         X_3d = np.concatenate((X1, X2, X3, X4), axis=1)
 
@@ -76,7 +81,7 @@ class Controller:
 class Model:
 
     @staticmethod
-    def dynamic_2d( p0, pf, kd, kp):
+    def dynamic_2d(p0, pf, kd, kp):
         """
 
         :param p0: initial pose
@@ -87,7 +92,7 @@ class Model:
         """
         g = 9.81
 
-        # delta of the displacement and its norm
+        # displacement and its norm
         dp = pf - p0
         d = np.linalg.norm(dp)
         dp = dp.reshape(dp.shape[0])
@@ -105,7 +110,7 @@ class Model:
         vz = v*dp[1]/d
 
         pitch = -(-vy*kd+kp*(dp[0] - p*dp[0]/d))/g
-        pitch_dot = np.zeros ((1, pitch.shape[1]))
+        pitch_dot = np.zeros((1, pitch.shape[1]))
 
         X_2D = np.concatenate((py, pz, pitch, vy, vz, pitch_dot), axis=0)
 
@@ -172,7 +177,7 @@ class Model:
 class Maneuver:
 
     @staticmethod
-    def hover( ph, t, dt):
+    def hover(ph, t, dt):
         """
 
         :param ph: hover pose
@@ -208,7 +213,7 @@ def PD(kd, kp, p0, p0d, q_des):
         dy2 = -kd * y[1] + kp * (q_des - y[0])
         return [dy1, dy2]
 
-    t2 = np.linspace(0,15,1500)
+    t2 = np.linspace(0, 15, 1500)
     p0 = [p0, p0d]
 
     P = integrate.odeint(diff2, p0, t2, tfirst=True)
