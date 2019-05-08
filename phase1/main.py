@@ -1,10 +1,12 @@
-import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from model import *
 
-model = model()
+# TODO: Use user inputs to select either 2D or 3D case.
+# TODO: Ask user to input initial and final poses for the quad
+# TODO: Use pen to draw the trajectory of the drone
 
+model = model()
 """ For Part A"""
 
 # 2D initial positions
@@ -53,16 +55,13 @@ ax.set_zlabel('Z-axis')
 
 plt.title('The path of the Quadrotor in 3D')
 
-labels_3d = ['X-position','Y-position', 'Z-position', 'Pitch', 'Roll', 'Yaw',
+labels_3d = ['X-position', 'Y-position', 'Z-position', 'Pitch', 'Roll', 'Yaw',
              'X-velocity', 'Y-velovity', 'Z-velocity', 'Pitch-dot', 'Yaw-dot', 'Roll-dot']
 
+fig4 = plt.figure(4)
 for i in range(len(X_3d)):
     plt.subplot(4,3,i+1)
     plt.plot(t_3d, X_3d[i, :])
-
-    if i >= 3 and i<=5:
-        #plt.ylim((-1.4, 0.4))
-        continue
     plt.xlabel('Time')
     plt.ylabel(labels_3d[i])
 plt.show()
