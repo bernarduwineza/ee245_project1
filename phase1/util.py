@@ -6,7 +6,7 @@ from  scipy import integrate
 g = 9.81
 
 
-class Model:
+class Controller:
     def control_2d(self, q0, qh, zt, T):
         """
 
@@ -23,19 +23,19 @@ class Model:
 
         # vertical takeoff on the z-axis
         p_zt = np.array([q0[0],[zt]])
-        X1 = self.dynamic_2d(q0, p_zt, kd, kp)
+        X1 = Model.dynamic_2d(q0, p_zt, kd, kp)
 
         #s traight line
         p_l = X1[:2, -1].reshape(2,1)
-        X2 = self.dynamic_2d(p_l, qh, kd, kp)
+        X2 = Model.dynamic_2d(p_l, qh, kd, kp)
 
         # hover
-        X3 = self.hover(X2[:,-1], T, dt)
+        X3 = Maneuver.hover(X2[:,-1], T, dt)
 
         # vertical landing on the z-axis
         p_land = np.array([qh[0], [0.0]])
         p_zl = X3[:2,-1].reshape(2,1)
-        X4 = self.dynamic_2d(p_zl, p_land, kd, kp)
+        X4 = Model.dynamic_2d(p_zl, p_land, kd, kp)
         X_2d = np.concatenate((X1, X2, X3, X4), axis=1)
 
         return X_2d, dt
@@ -55,24 +55,28 @@ class Model:
 
         # vertical takeoff on the z-axis
         p_zt = np.array([q0[0], q0[1], [zt]])
-        X1 = self.dynamic_3d(q0, p_zt, kd, kp)
+        X1 = Model.dynamic_3d(q0, p_zt, kd, kp)
 
-        #straight line
+        # straight line
         p_l = X1[:3, -1].reshape(3,1)
-        X2 = self.dynamic_3d(p_l, qh, kd, kp)
+        X2 = Model.dynamic_3d(p_l, qh, kd, kp)
 
         # hover
-        X3 = self.hover(X2[:,-1], T, dt)
+        X3 = Maneuver.hover(X2[:,-1], T, dt)
 
         # vertical landing on the z-axis
         p_land = np.array([qh[0], qh[1], [0.0]])
         p_zl = X3[:3,-1].reshape(3,1)
-        X4 = self.dynamic_3d(p_zl, p_land, kd, kp)
+        X4 = Model.dynamic_3d(p_zl, p_land, kd, kp)
         X_3d = np.concatenate((X1, X2, X3, X4), axis=1)
 
         return X_3d, dt
 
-    def dynamic_2d (self, p0, pf, kd, kp):
+
+class Model:
+
+    @staticmethod
+    def dynamic_2d( p0, pf, kd, kp):
         """
 
         :param p0: initial pose
@@ -107,7 +111,8 @@ class Model:
 
         return X_2D
 
-    def dynamic_3d (self, p0, pf, kd, kp):
+    @staticmethod
+    def dynamic_3d( p0, pf, kd, kp):
         """
 
         :param p0: initial pose
@@ -163,7 +168,11 @@ class Model:
 
         return X_3D
 
-    def hover (self, ph, t, dt):
+
+class Maneuver:
+
+    @staticmethod
+    def hover( ph, t, dt):
         """
 
         :param ph: hover pose
