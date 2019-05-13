@@ -66,17 +66,16 @@ def partA():
     # 2D initial positions
     ##zhq:
 
-    arr = input("q0_2d:")  ##输入一个一维数组，每个数之间使空格隔开
-    q0_2d = [[int(n)] for n in arr.split()]  ##将输入每个数以空格键隔开做成数组##
-    q0_2d = np.array(q0_2d)
+    arr = input("init position: q0_2d:")  ##enter into the 2 number like 0 0
+    q0_2d = [[int(n)] for n in arr.split()]  ##
 
-    arr = input("qh_2d:")  ##输入一个一维数组，每个数之间使空格隔开
-    qh_2d = [[int(n)] for n in arr.split()]  ##将输入每个数以空格键隔开做成数组##
+    arr = input("final destination: qh_2d:")  ## enter the final destination: like 3 4
+    qh_2d = [[int(n)] for n in arr.split()]  ##
     qh_2d = np.array(qh_2d)
 
-    zt_2d = eval(input('Enter the initial height(in meters):'))
+    zt_2d = eval(input('Enter the initial height(in meters):')) ## enter into the the height like: 2
 
-    T_2d = eval(input('Enter the time:'))
+    T_2d = eval(input('Enter the time:'))## enter into the hovering time like 2s
 
 
     X_2d, dt = controller.control_2d(q0_2d, qh_2d, zt_2d,
@@ -107,17 +106,17 @@ def partB():
     X_3d = []
     ln_3d = ax_3d.scatter([], [], [], 'ro', animated=False)
 
-    arr = input("q0_3d:")
+    arr = input("initing pos:q0_3d:like 0 0 0")## enter into the initing position like 0 0 0
     q0_3d = [[int(n)] for n in arr.split()]
     q0_3d = np.array(q0_3d)
 
-    arr = input("qh_3d:")
+    arr = input("final pos: qh_3d:like 3 4 5")## enter into the final position like 3 4 5
     qh_3d = [[int(n)] for n in arr.split()]
     qh_3d = np.array(qh_3d)
 
-    zt_3d = eval(input('Enter the initial height(in meters):'))
+    zt_3d = eval(input('Enter the initial height(in meters):')) ## enter into the height like 2
 
-    T_3d = eval(input('Enter the time:'))
+    T_3d = eval(input('Enter the time:')) ## enter into the time like 3
 
 
     #
