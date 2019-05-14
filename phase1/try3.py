@@ -186,6 +186,8 @@ def partB():
         plt.ylabel(labels_3d[i])
 
     plt.show()
+    stop = input("stop:")
+    print('stop')
 
 
 
@@ -203,5 +205,5 @@ def main():
 
 
 main()
-plt.show()
+
 
