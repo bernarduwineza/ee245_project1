@@ -122,9 +122,10 @@ def partB():
 
     time_template = 'time = %.1fs'
     pos_template = 'pos = (%.2f,%.2f，%.2f)'
+    angle_template='angle = (%.2f,%.2f，%.2f)'
     time_text = ax_3d.text2D(0.05, 0.9 ,'', transform=ax_3d.transAxes)
     pos_text = ax_3d.text2D(0.05, 0.8, '', transform=ax_3d.transAxes)
-
+    angle_text = ax_3d.text2D(0.05, 0.7, '', transform=ax_3d.transAxes)
 
     arr = input("initing pos:q0_3d:like 0 0 0")## enter into the initing position like 0 0 0
     q0_3d = [[int(n)] for n in arr.split()]
@@ -162,26 +163,27 @@ def partB():
         print('the angle(Pitch, Roll, Yaw):({0:.3f},{1:0.3f},{2:.3f})'.format(X_3d[3, i*5], X_3d[4, i*5],X_3d[5, i*5]))
         time_text.set_text(time_template % (0.05 * i))
         pos_text.set_text(pos_template % (X_3d[0, i*5],X_3d[1, i*5],X_3d[2, i*5]))
+        angle_text.set_text(angle_template % (X_3d[3, i * 5], X_3d[4, i * 5], X_3d[5, i * 5]))
 
 
         plt.pause(0.01)
         if 5*i>(n-5):
             break
 
-    # ax.scatter(X_3d[0, :], X_3d[1, :], X_3d[2, :])
 
-    #
-    #
-    #
-    # labels_3d = ['X-position', 'Y-position', 'Z-position', 'Pitch', 'Roll', 'Yaw',
-    #              'X-velocity', 'Y-velovity', 'Z-velocity', 'Pitch-dot', 'Yaw-dot', 'Roll-dot']
-    #
-    # fig4 = plt.figure(4)
-    # for i in range(len(X_3d)):
-    #     plt.subplot(4, 3, i + 1)
-    #     plt.plot(t_3d, X_3d[i, :])
-    #     plt.xlabel('Time')
-    #     plt.ylabel(labels_3d[i])
+
+
+
+
+    labels_3d = ['X-position', 'Y-position', 'Z-position', 'Pitch', 'Roll', 'Yaw',
+                 'X-velocity', 'Y-velovity', 'Z-velocity', 'Pitch-dot', 'Yaw-dot', 'Roll-dot']
+
+    fig4 = plt.figure(4)
+    for i in range(len(X_3d)):
+        plt.subplot(4, 3, i + 1)
+        plt.plot(t_3d, X_3d[i, :])
+        plt.xlabel('Time')
+        plt.ylabel(labels_3d[i])
 
     plt.show()
 
