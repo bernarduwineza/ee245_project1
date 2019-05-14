@@ -109,23 +109,26 @@ def partA():
     plt.xlabel('Y-position')
     plt.ylabel('Z-position')
     plt.title('The path of the Quadrotor in 2D')
+
+
+    labels_2d = ['Y-position', 'Z-position', 'Pitch', 'Y-velovity', 'Z-velocity', 'Pitch-dot']
+    fig2 = plt.figure(2)
+    for i in range(len(X_2d)):
+        plt.subplot('23' + str(i + 1))
+        plt.plot(t_2d, X_2d[i, :])
+        plt.xlabel('Time')
+        plt.ylabel(labels_2d[i])
     plt.show()
+    stop = input("stop:")
+    print('stop')
+
 
 def partB():
     """ For part B"""
 
-
-    fig3 = plt.figure(3)
-    ax_3d = Axes3D(fig3)
     X_3d = []
-    ln_3d = ax_3d.scatter([], [], [], 'ro', animated=False)
 
-    time_template = 'time = %.1fs'
-    pos_template = 'pos = (%.2f,%.2f，%.2f)'
-    angle_template='angle = (%.2f,%.2f，%.2f)'
-    time_text = ax_3d.text2D(0.05, 0.9 ,'', transform=ax_3d.transAxes)
-    pos_text = ax_3d.text2D(0.05, 0.8, '', transform=ax_3d.transAxes)
-    angle_text = ax_3d.text2D(0.05, 0.7, '', transform=ax_3d.transAxes)
+
 
     arr = input("initing pos:q0_3d:like 0 0 0")## enter into the initing position like 0 0 0
     q0_3d = [[int(n)] for n in arr.split()]
@@ -143,6 +146,30 @@ def partB():
     #
     X_3d, dt = controller.control_3d(q0_3d, qh_3d, zt_3d, T_3d)
     t_3d = np.linspace(0, dt*X_3d.shape[1], X_3d.shape[1])
+    ##
+    labels_3d = ['X-position', 'Y-position', 'Z-position', 'Pitch', 'Roll', 'Yaw',
+                 'X-velocity', 'Y-velovity', 'Z-velocity', 'Pitch-dot', 'Yaw-dot', 'Roll-dot']
+
+    fig4 = plt.figure(4)
+    for i in range(len(X_3d)):
+        plt.subplot(4, 3, i + 1)
+        plt.plot(t_3d, X_3d[i, :])
+        plt.xlabel('Time')
+        plt.ylabel(labels_3d[i])
+
+
+
+    fig3 = plt.figure(3)
+    ax_3d = Axes3D(fig3)
+    ln_3d = ax_3d.scatter([], [], [], 'ro', animated=False)
+
+
+    time_template = 'time = %.1fs'
+    pos_template = 'pos = (%.2f,%.2f，%.2f)'
+    angle_template='angle = (%.2f,%.2f，%.2f)'
+    time_text = ax_3d.text2D(0.05, 0.9 ,'', transform=ax_3d.transAxes)
+    pos_text = ax_3d.text2D(0.05, 0.8, '', transform=ax_3d.transAxes)
+    angle_text = ax_3d.text2D(0.05, 0.7, '', transform=ax_3d.transAxes)
 
 
 
@@ -175,15 +202,7 @@ def partB():
 
 
 
-    labels_3d = ['X-position', 'Y-position', 'Z-position', 'Pitch', 'Roll', 'Yaw',
-                 'X-velocity', 'Y-velovity', 'Z-velocity', 'Pitch-dot', 'Yaw-dot', 'Roll-dot']
 
-    fig4 = plt.figure(4)
-    for i in range(len(X_3d)):
-        plt.subplot(4, 3, i + 1)
-        plt.plot(t_3d, X_3d[i, :])
-        plt.xlabel('Time')
-        plt.ylabel(labels_3d[i])
 
     plt.show()
     stop = input("stop:")
