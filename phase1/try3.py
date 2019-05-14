@@ -6,7 +6,7 @@ from matplotlib.animation import FuncAnimation
 
 """
 Plannar Quadrotor ocntrol
-
+TEST
 authors: Jean-Bernard Uwineza & Zhao Hangquan
 """
 
