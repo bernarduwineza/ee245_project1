@@ -135,9 +135,9 @@ def partB():
     qh_3d = [[int(n)] for n in arr.split()]
     qh_3d = np.array(qh_3d)
 
-    zt_3d = eval(input('Enter the initial height(in meters):')) ## enter into the height like 2
+    zt_3d = eval(input('Enter the initial height(in meters):like 2')) ## enter into the height like 2
 
-    T_3d = eval(input('Enter the time:')) ## enter into the time like 3
+    T_3d = eval(input('Enter the time:like 2')) ## enter into the time like 3
 
 
     #
@@ -203,4 +203,5 @@ def main():
 
 
 main()
+plt.show()
 
