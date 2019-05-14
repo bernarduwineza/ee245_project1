@@ -113,6 +113,12 @@ def partB():
     X_3d = []
     ln_3d = ax_3d.scatter([], [], [], 'ro', animated=False)
 
+    time_template = 'time = %.1fs'
+    pos_template = 'pos = (%.2f,%.2f，%.2f)'
+    time_text = ax_3d.text2D(0.05, 0.9 ,'', transform=ax_3d.transAxes)
+    pos_text = ax_3d.text2D(0.05, 0.8, '', transform=ax_3d.transAxes)
+
+
     arr = input("initing pos:q0_3d:like 0 0 0")## enter into the initing position like 0 0 0
     q0_3d = [[int(n)] for n in arr.split()]
     q0_3d = np.array(q0_3d)
@@ -147,6 +153,9 @@ def partB():
         ax_3d.scatter(X_3d[0, i*5], X_3d[1, i*5], X_3d[2, i*5], c='r',marker=".")
         print('the position:({0:.3f},{1:0.3f},{2:.3f})'.format(X_3d[0, i*5], X_3d[1, i*5],X_3d[2, i*5]))
         print('the angle(Pitch, Roll, Yaw):({0:.3f},{1:0.3f},{2:.3f})'.format(X_3d[3, i*5], X_3d[4, i*5],X_3d[5, i*5]))
+        time_text.set_text(time_template % (0.05 * i))
+        pos_text.set_text(pos_template % (X_3d[0, i*5],X_3d[1, i*5],X_3d[2, i*5]))
+
 
         plt.pause(0.01)
         if 5*i>(n-5):
