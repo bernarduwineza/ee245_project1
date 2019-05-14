@@ -24,7 +24,7 @@ from utils.quadPlot import plot_quad_3d
 controller = Controller()
 
 
-###this is for 3-dimension
+###this isfor 3-dimension
 
 
 
@@ -39,7 +39,8 @@ def partA():
     def D2_init():
         ax.set_xlim(0, 10)
         ax.set_ylim(0, 10)
-        return ln,
+        pos_text.set_text('')
+        return ln, pos_text,time_text,
 
     def D2_update(i):
         xdata.append(X_2d[0, i])
@@ -48,12 +49,18 @@ def partA():
         print('the position:({0:.3f},{1:0.3f})'.format(X_2d[0, i], X_2d[1, i]))
         print('the pitch:{0:.3f}'.format(X_2d[2, i]))
 
-        return ln,
+        time_text.set_text(time_template % (0.01 * i))
+        pos_text.set_text(pos_template % (X_2d[0, i],X_2d[1, i]))
+        return ln,  pos_text,time_text,
     ##
     fig, ax = plt.subplots()
     xdata, ydata, zdata = [], [], []
-
     ln, = ax.plot([], [], 'ro', animated=False)
+    time_template = 'time = %.1fs'
+    pos_template = 'pos = (%.2f,%.2f)'
+    time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
+    pos_text = ax.text(0.05, 0.8, '', transform=ax.transAxes)
+
     X_2d = []
     frames = []
 
