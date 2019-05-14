@@ -5,7 +5,8 @@ authors: Jean-bernard Uwineza & Zhao Hangquan
 """
 import numpy as np
 from scipy import integrate
-g = 9.81
+from utils import params
+g = params.g
 
 
 class Controller:
@@ -117,7 +118,7 @@ class Model:
         return X_2D
 
     @staticmethod
-    def dynamic_3d( p0, pf, kd, kp):
+    def dynamic_3d(p0, pf, kd, kp):
         """
 
         :param p0: initial pose
@@ -161,10 +162,10 @@ class Model:
         vz = v*Sp
 
         pitch = -(-vy*kd+kp*(dp[1] - p*dp[1]/d))/g
-        pitch_dot = np.zeros ((1, pitch.shape[1]))
+        pitch_dot = np.zeros((1, pitch.shape[1]))
 
         roll = -(-vx*kd + kp*(dp[0] + p*dp[0]/d))/g
-        roll_dot = np.zeros((1,roll.shape[1]))
+        roll_dot = np.zeros((1, roll.shape[1]))
 
         yaw = np.zeros((1, roll.shape[1]))
         yaw_dot = np.zeros((1, roll.shape[1]))
