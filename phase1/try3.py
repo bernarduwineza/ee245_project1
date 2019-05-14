@@ -39,8 +39,11 @@ def partA():
     def D2_init():
         ax.set_xlim(0, 10)
         ax.set_ylim(0, 10)
+        time_text.set_text('')
         pos_text.set_text('')
-        return ln, pos_text,time_text,
+        pitch_text.set_text('')
+
+        return ln, pos_text,time_text,pitch_text
 
     def D2_update(i):
         xdata.append(X_2d[0, i])
@@ -51,15 +54,19 @@ def partA():
 
         time_text.set_text(time_template % (0.01 * i))
         pos_text.set_text(pos_template % (X_2d[0, i],X_2d[1, i]))
-        return ln,  pos_text,time_text,
+        pitch_text.set_text(pitch_template % X_2d[2, i])
+
+        return ln,  pos_text,time_text,pitch_text
     ##
     fig, ax = plt.subplots()
     xdata, ydata, zdata = [], [], []
     ln, = ax.plot([], [], 'ro', animated=False)
     time_template = 'time = %.1fs'
     pos_template = 'pos = (%.2f,%.2f)'
+    pitch_template = 'pitch = %.2fs'
     time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
     pos_text = ax.text(0.05, 0.8, '', transform=ax.transAxes)
+    pitch_text=ax.text(0.05, 0.7, '', transform=ax.transAxes)
 
     X_2d = []
     frames = []
@@ -73,16 +80,16 @@ def partA():
     # 2D initial positions
     ##zhq:
 
-    arr = input("init position: q0_2d:")  ##enter into the 2 number like 0 0
+    arr = input("init position: q0_2d: like 0 0")  ##enter into the 2 number like 0 0
     q0_2d = [[int(n)] for n in arr.split()]  ##
 
-    arr = input("final destination: qh_2d:")  ## enter the final destination: like 3 4
+    arr = input("final destination: qh_2d: like 4 5")  ## enter the final destination: like 3 4
     qh_2d = [[int(n)] for n in arr.split()]  ##
     qh_2d = np.array(qh_2d)
 
-    zt_2d = eval(input('Enter the initial height(in meters):')) ## enter into the the height like: 2
+    zt_2d = eval(input('Enter the initial height(in meters): like 2')) ## enter into the the height like: 2
 
-    T_2d = eval(input('Enter the time:'))## enter into the hovering time like 2s
+    T_2d = eval(input('Enter the time:like 2'))## enter into the hovering time like 2s
 
 
     X_2d, dt = controller.control_2d(q0_2d, qh_2d, zt_2d,
@@ -160,8 +167,7 @@ def partB():
         plt.pause(0.01)
         if 5*i>(n-5):
             break
-    #ani = FuncAnimation(fig3, D3_update, frames=n,interval=5,
-     #                   init_func=D3_init, blit=True)
+
     # ax.scatter(X_3d[0, :], X_3d[1, :], X_3d[2, :])
 
     #
