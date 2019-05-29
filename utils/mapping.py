@@ -80,7 +80,7 @@ def visualise_voxmap(voxmap):
     plt.show()
 
 
-def create_local_voxmap(data, vehicle_position, limits, voxel_size):
+def create_local_voxmap(data, position, limits, voxel_size):
     """
     Returns a grid representation of a 3D configuration space
     based on given obstacle data.
@@ -107,7 +107,7 @@ def create_local_voxmap(data, vehicle_position, limits, voxel_size):
     voxmap = np.zeros((north_size, east_size, alt_size), dtype=np.bool)
 
     for i in range(data.shape[0]):
-        if numpy.array_equal(data[i], position):
+        if np.array_equal(data[i], position):
             indx = i
             break
     north, east, alt, d_north, d_east, d_alt = data[indx - limits:indx + limits + 1, :]
