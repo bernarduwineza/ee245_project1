@@ -1,4 +1,5 @@
 """
 Path planning using the A* algorithm.
-This assues the availability of a binary occupancy grid.
+This assumes the availability of a binary occupancy grid that represent the robot's space configuration.
 """
+
