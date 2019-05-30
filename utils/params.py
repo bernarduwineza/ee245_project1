@@ -1,8 +1,5 @@
 """
-author: Peter Huang
-email: hbd730@gmail.com
-license: BSD
-Please feel free to use and modify this, but keep the above information. Thanks!
+Parameters of the quadtrotor
 """
 
 import numpy as np
