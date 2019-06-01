@@ -8,7 +8,7 @@ print(np.shape(data))
 filename = 'sample_obs.csv'
 data = np.loadtxt(filename, delimiter=',', dtype='Float64', skiprows=2)
 
-voxmap = mapping.create_voxmap(data, 2)
+voxmap = mapping.create_voxmap(data, 5)
 
 mapping.visualise_voxmap(voxmap)
 
