@@ -111,7 +111,7 @@ def partB():
     angle_text = ax_3d.text2D(0.05, 0.7, '', transform=ax_3d.transAxes)
 
     arr = input("Enter initial position coordinates, q0, separated by a blank space. (Example : 0 0 0) ")
-    q0_3d = [[int(n)] for n in arr.split()]
+    q0_3d = [[int(n)] for n in arr.split()] #convert it into list
     q0_3d = np.array(q0_3d)
 
     arr = input("Enter final vertical position coordinates, qh,  separated by a blank space. (Example : 3 4 5) ")      # enter into the final position like 3 4 5
