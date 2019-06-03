@@ -117,7 +117,7 @@ def quad_sim(x_c, y_c, z_c):
             t += dt
 
         t = 0
-        i = (i + 1) % 4
+        i = (i + 1)
         irun += 1
         if irun >= n_run:
             break
@@ -201,12 +201,13 @@ def main():
     pkl_file = open('./../phase2/path.pkl', 'rb')
     path = pickle.load(pkl_file)
     pkl_file.close()
+
     x_coeffs = [1]*len(path)
     y_coeffs = [1]*len(path)
     z_coeffs = [1]*len(path)
 
-    for i in range(len(path)):
-        traj = TrajectoryGenerator(path[i], path[(i + 1) % 4], T)
+    for i in range(len(path)-1):
+        traj = TrajectoryGenerator(path[i], path[(i + 1)], T)
         traj.solve()
         x_coeffs[i] = traj.x_c
         y_coeffs[i] = traj.y_c

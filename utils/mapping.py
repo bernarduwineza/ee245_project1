@@ -62,7 +62,6 @@ def create_grid(data, res):
     print('Finished generating map in: ', str(end-start), 'seconds \n')
     print('Number of grids: ', str(x_size*y_size*z_size), 'cells \n')
 
-
     grid_pkl = open('grid.pkl', 'wb')
     pickle.dump(grid, grid_pkl)
     grid_pkl.close()
