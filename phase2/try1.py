@@ -24,16 +24,16 @@ def astar(maze, start, end):
     ax_3d = Axes3D(fig3)
     pos_text = ax_3d.text2D(0.05, 0.8, '', transform=ax_3d.transAxes)
     pos_template = 'Current position = (%.2f,%.2f，%.2f)'
-    ax_3d.set_xlim3d(0, 2000)
-    ax_3d.set_ylim3d(0, 2000)
-    ax_3d.set_zlim3d(0, 2000)
+    ax_3d.set_xlim3d(0, 40)
+    ax_3d.set_ylim3d(0, 40)
+    ax_3d.set_zlim3d(0, 40)
     plt.ion()
     plt.title('The path of the Quadrotor in 3D')
     ax_3d.set_xlabel('X-axis')
     ax_3d.set_ylabel('Y-axis')
     ax_3d.set_zlabel('Z-axis')
-    C_obs = ax_3d.bar3d(40, 40, 0, 100,
-                        100, 100)
+    C_obs = ax_3d.bar3d(2, 2, 0, 10,
+                        10, 10)
 
     # Create start and end node
     start_node = Node(None, start)
@@ -66,9 +66,13 @@ def astar(maze, start, end):
         print(current_node.position)
 
         ## draw the point
-        ax_3d.scatter(current_node.position[0], current_node.position[1], current_node.position[2], c='r', marker=".")
+        # ax_3d.scatter(current_node.position[0], current_node.position[1], current_node.position[2], c='r', marker=".")
+        ax_3d.scatter(current_node.position[0], current_node.position[1], current_node.position[2])
         pos_text.set_text(pos_template % (current_node.position[0], current_node.position[1], current_node.position[2]))
+        # ax_3d.draw()  # 注意此函数需要调用
+
         plt.show()
+        plt.pause(0.001)
         # Found the goal
         if current_node == end_node:
             path = []
@@ -129,21 +133,21 @@ def astar(maze, start, end):
 
             # Add the child to the open list
             open_list.append(child)
-            #print('fuccccccadd:%d',child.position)
+            print('fuccccccadd:%d',child.position)
 
 
 def main():
-    figure_scale = 20
-    gird_length = 0.05
+    figure_scale = 40
+    gird_length = 1
 
 
     figure_grid=int(figure_scale/gird_length)
     maze_zero = np.zeros((figure_grid , figure_grid , figure_grid))
     start = (0, 0, 0)
-    end=(40,40,40)
+    end=(20,20,20)
     #end = (int(50), int(50), int(50))
     #end=[int(c) for c in end]
-    obstacle_size = [5, 5, 5]
+    obstacle_size = [10, 10, 10]
     obstacle_loc = [2, 2, 0]
     obstacle_size=[int(c/gird_length) for c in obstacle_size]##int(obstacle_size/gird_length)
     obstacle_loc = [int(c/gird_length) for c in obstacle_loc]#int(obstacle_loc/gird_length)
