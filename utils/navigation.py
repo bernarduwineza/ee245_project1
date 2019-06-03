@@ -41,9 +41,9 @@ def quad_sim(x_c, y_c, z_c):
     follow the trajectory described by the sets of coefficients
     x_c, y_c, and z_c.
     """
-    x_pos = -5
-    y_pos = -5
-    z_pos = 5
+    x_pos = int(x_c[0][0])
+    y_pos = int(y_c[0][1])
+    z_pos = int(z_c[0][2])
     x_vel = 0
     y_vel = 0
     z_vel = 0
