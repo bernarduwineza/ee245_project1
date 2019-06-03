@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-
+import time
 import pickle
 
 
@@ -188,8 +188,16 @@ goal = [15.0, 20, 30]
 heuristic = calcheuristic(grid, goal)
 
 maxp = 4.0
+start_time = time.perf_counter()
 path = search(start, goal, grid, heuristic, maxp)
+end_time = time.perf_counter()
 
+path_pkl = open('./../phase2/path.pkl', 'wb')
+pickle.dump(path, path_pkl)
+path_pkl.close()
+print('Pickled the path...')
+
+print('A* execution time is: ', str(end_time-start_time), 'seconds \n')
 
 def plot3Dgrid(grid, az, el):
     # plot the surface
