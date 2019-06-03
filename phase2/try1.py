@@ -98,6 +98,7 @@ def astar(maze, start, end):
 
             # Make sure walkable terrain
             if maze[node_position[0]][node_position[1]][node_position[2]] != 0:
+                print(node_position)
                 continue
 
             # Create new node
@@ -144,14 +145,16 @@ def main():
     figure_grid=int(figure_scale/gird_length)
     maze_zero = np.zeros((figure_grid , figure_grid , figure_grid))
     start = (0, 0, 0)
-    end=(20,20,20)
+    end=(20,20,0)
     #end = (int(50), int(50), int(50))
     #end=[int(c) for c in end]
     obstacle_size = [10, 10, 10]
     obstacle_loc = [2, 2, 0]
     obstacle_size=[int(c/gird_length) for c in obstacle_size]##int(obstacle_size/gird_length)
     obstacle_loc = [int(c/gird_length) for c in obstacle_loc]#int(obstacle_loc/gird_length)
-    maze_zero[obstacle_loc[0]:obstacle_loc[0] + obstacle_size[0], obstacle_loc[1]:obstacle_loc[1] + obstacle_size[1], obstacle_loc[2]:obstacle_loc[2] + obstacle_size[2]] = np.ones((obstacle_size[0], obstacle_size[1], obstacle_size[2]))
+    #maze_zero[obstacle_loc[0]:obstacle_loc[0] + obstacle_size[0], obstacle_loc[1]:obstacle_loc[1] + obstacle_size[1], obstacle_loc[2]:obstacle_loc[2] + obstacle_size[2]] = np.ones((obstacle_size[0], obstacle_size[1], obstacle_size[2]))
+    maze_zero[(obstacle_loc[0]-1):(obstacle_loc[0] + obstacle_size[0]+1), (obstacle_loc[1]-1):(obstacle_loc[1] + obstacle_size[1]+1), (obstacle_loc[2]-1):(obstacle_loc[2] + obstacle_size[2]+1)] = 1
+    maze_zero[1:12,1:12,0:10]=1
     maze=maze_zero
     if maze[end[0], end[1], end[2]] is 1:
         print('fault')
