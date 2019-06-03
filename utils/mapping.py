@@ -21,7 +21,53 @@ The  map is a rectangular parallelepiped coonfiguration space specified by its s
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import time
+import pickle
 
+
+def create_grid(data, res):
+    """
+        Returns a grid representation of a 3D configuration space
+        based on given obstacle data.
+
+        The `res` argument sets the resolution of the grid map.
+    """
+
+    # set grid size
+    x_max, y_max, z_max = data[0, 0:3]
+
+    x_size = int(x_max // res)
+    y_size = int(y_max // res)
+    z_size = int(z_max // res)
+
+    grid = np.zeros((x_size, y_size, z_size), dtype=np.int)
+
+    start = time.perf_counter()
+    for i in range(data.shape[0]-1):
+
+        x, y, z, dx, dy, dz = data[i+1, :]
+        # TODO: fill in the voxels that are part of an obstacle with `True`
+        obstacles = [
+            int(x // res),
+            int(x + dx // res),
+
+            int(y // res),
+            int(y + dy // res),
+
+            int(z // res),
+            int(z + dz // res)
+        ]
+        grid[obstacles[0]:obstacles[1], obstacles[2]:obstacles[3], obstacles[4]:obstacles[5]] = 1
+    end = time.perf_counter()
+    print('Finished generating map in: ', str(end-start), 'seconds \n')
+    print('Number of grids: ', str(x_size*y_size*z_size), 'cells \n')
+
+
+    grid_pkl = open('grid.pkl', 'wb')
+    pickle.dump(grid, grid_pkl)
+    grid_pkl.close()
+    print('Pickled the map...')
+    return grid
 
 def create_voxmap(data, voxel_size):
     """
@@ -72,10 +118,10 @@ def visualise_voxmap(voxmap):
     ax.set_xlim(voxmap.shape[0], 0)
     ax.set_ylim(0, voxmap.shape[1])
     # add 100 to the height so the buildings aren't so tall
-    ax.set_zlim(0, voxmap.shape[2] + 70)
+    ax.set_zlim(0, voxmap.shape[2])
 
-    plt.xlabel('North')
-    plt.ylabel('East')
+    plt.xlabel('X')
+    plt.ylabel('Y')
 
     plt.show()
 

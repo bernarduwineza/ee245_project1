@@ -1,14 +1,15 @@
 from utils import mapping
 import numpy as np
+import io
 
-data = np.array([20, 20, 40, 10, 10, 10])
-data = data.reshape((1, 6))
-print(np.shape(data))
+filename = 'SampleEnvironment.txt'
+s = open('SampleEnvironment.txt').read().replace(':', ';')
 
-filename = 'sample_obs.csv'
-data = np.loadtxt(filename, delimiter=',', dtype='Float64', skiprows=2)
+data = np.loadtxt(io.StringIO(s), delimiter=';', dtype='Float64', comments='#', skiprows=2)
 
-voxmap = mapping.create_voxmap(data, 5)
 
-mapping.visualise_voxmap(voxmap)
+grid = mapping.create_grid(data, 0.1)
+
+
+# mapping.visualise_voxmap(voxmap)
 
