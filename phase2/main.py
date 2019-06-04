@@ -1,6 +1,8 @@
 import numpy as np
 import io
 import pickle
+import cProfile
+import re
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from function_planning  import Node
@@ -49,3 +51,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    cProfile.run('main()')

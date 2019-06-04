@@ -78,6 +78,13 @@ class Controller:
 
         return X_3d, dt
 
+    @staticmethod
+    def control(q0, qf):
+        kd = 3.0
+        kp = 2
+        dt = .01
+
+
 
 class Model:
 

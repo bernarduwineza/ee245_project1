@@ -2,7 +2,7 @@
 Navigate a 3D trajectory
 
 Author: Jean-Bernard Uwineza
-    (with some input from  Daniel Ingram's implementation from GitHub.)
+    (with some input from Daniel Ingram's implementation from GitHub.)
 """
 
 from math import cos, sin
@@ -16,23 +16,23 @@ show_animation = True
 
 # Simulation parameters
 g = 9.81
-m = 0.2
-Ixx = 1
-Iyy = 1
-Izz = 1
+m = 0.03
+Ixx = 1.43e-5
+Iyy = 1.43e-5
+Izz = 2.89e-5
 T = 2
 
 # Proportional coefficients
 Kp_x = 1
 Kp_y = 1
 Kp_z = 1
-Kp_roll = 25
-Kp_pitch = 25
-Kp_yaw = 25
+Kp_roll = 15
+Kp_pitch = 10
+Kp_yaw = 15
 
 # Derivative coefficients
 Kd_x = 10
-Kd_y = 10
+Kd_y = 100
 Kd_z = 1
 
 
@@ -60,7 +60,7 @@ def quad_sim(x_c, y_c, z_c):
 
     des_yaw = 0
 
-    dt = 0.1
+    dt = 0.01
     t = 0
 
     q = Quadrotor(x=x_pos, y=y_pos, z=z_pos, roll=roll,
