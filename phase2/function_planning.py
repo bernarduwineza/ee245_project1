@@ -25,14 +25,14 @@ class obstacle():
     def __eq__(self, other):
         return (self.location == other.location and self.size == other.size)
 
-def draw_figure(obstacle_list, path):
+def draw_figure(obstacle_list, path, size):
     fig3 = plt.figure(3)
     ax_3d = Axes3D(fig3)
     pos_text = ax_3d.text2D(0.05, 0.8, '', transform=ax_3d.transAxes)
     pos_template = 'Current position = (%.2f,%.2f，%.2f)'
-    ax_3d.set_xlim3d(0, 40)
-    ax_3d.set_ylim3d(0, 40)
-    ax_3d.set_zlim3d(0, 40)
+    ax_3d.set_xlim3d(0, size[0])
+    ax_3d.set_ylim3d(0, size[1])
+    ax_3d.set_zlim3d(0, size[2])
     plt.ion()
     plt.title('The path of the Quadrotor in 3D')
     ax_3d.set_xlabel('X-axis')

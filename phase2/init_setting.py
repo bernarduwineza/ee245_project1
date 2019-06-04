@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from function_planning import obstacle
+
+
 obstacle_list=[]
 obstacle_exp=obstacle(location=[2, 2, 0],size=[10, 10, 10])
 obstacle_list.append(obstacle_exp)
