@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 class init_setting():
-    def __init__(self, figure_scale=40, gird_length=1, obstacle_loc=[2, 2, 0], obstacle_size=[10, 10, 10], start=(0, 0, 0), end=(20, 10, 0)):
-
+    #def __init__(self, figure_scale=40, gird_length=1, obstacle_loc=[2, 2, 0], obstacle_size=[10, 10, 10], start=(0, 0, 0), end=(20, 10, 0)):
+    def __init__(self, figure_scale=40, gird_length=1, obstacle=obstacle_list,
+                 start=(0, 0, 0), end=(20, 10, 0)):
         self.figure_scale=figure_scale
         self.gird_length=gird_length
         self.obstacle_loc=obstacle_loc
