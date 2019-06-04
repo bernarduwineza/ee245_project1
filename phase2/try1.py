@@ -12,13 +12,16 @@ from function_planning import draw_figure
 
 def main():
     obstacle_list=[]
-    obstacle_exp = obstacle(location=[2, 2, 0], size=[10, 10, 10])
+    obstacle_exp = obstacle(location=[2, 2, 0], size=[5, 5, 5])
+    obstacle_list.append(obstacle_exp)
+    obstacle_exp = obstacle(location=[1, 1, 0], size=[5, 5, 5])
     obstacle_list.append(obstacle_exp)
 
     map=init_setting(end=(20, 20, 0))
     path = astar(map.maze, map.start, map.end)
     print(path)
     draw_figure(obstacle_list, path)
+    plt.show()
 
 
 if __name__ == '__main__':

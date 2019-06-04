@@ -42,10 +42,11 @@ def draw_figure(obstacle_list, path):
         C_obs = ax_3d.bar3d(obstacle.location[0], obstacle.location[1], obstacle.location[2], obstacle.size[0],
                             obstacle.size[0], obstacle.size[0])
     for current_node in path:
-        ax_3d.scatter(current_node[0], current_node[1], current_node[2])
+        ax_3d.scatter(current_node[0], current_node[1], current_node[2], marker='o', c='red',s=50)
         pos_text.set_text(pos_template % (current_node[0], current_node[1], current_node[2]))
         plt.show()
-        plt.pause(0.001)
+
+    plt.show(fig3)
 
 
 
