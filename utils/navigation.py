@@ -19,7 +19,7 @@ m = 0.2
 Ixx = 1
 Iyy = 1
 Izz = 1
-T = 5
+T = 15
 
 # Proportional coefficients
 Kp_x = 1
