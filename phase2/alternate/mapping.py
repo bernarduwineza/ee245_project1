@@ -7,16 +7,6 @@ The obstacles are 3-dimensional rectangular parallelepiped objects, represented 
 The  map is a rectangular parallelepiped coonfiguration space specified by its side lengths.
 """
 
-# coding: utf-8
-
-# # 3D Map
-#
-# While representing the configuration space in 3 dimensions isn't entirely practical it's fun (and useful) to visualize things in 3D.
-#
-# In this exercise you'll finish the implementation of `create_grid` such that a 3D grid is returned where cells containing a voxel are set to `True`. We'll then plot the result!
-
-# In[1]:
-
 
 import numpy as np
 import matplotlib.pyplot as plt

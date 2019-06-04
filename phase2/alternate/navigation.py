@@ -113,7 +113,7 @@ def quad_sim(x_c, y_c, z_c):
 
             q.update_pose(x_pos, y_pos, z_pos, roll, pitch, yaw)
 
-            print(x_pos, y_pos, z_pos, roll, pitch, yaw)
+            # print(x_pos, y_pos, z_pos, roll, pitch, yaw)
 
             t += dt
 
@@ -191,18 +191,18 @@ def rotation_matrix(roll, pitch, yaw):
          ])
 
 
-def main():
+def navigation():
     """
     Calculates the x, y, z coefficients for the trajectory
     """
 
-    pkl_file = open('./../phase2/path2.pkl', 'rb')
+    pkl_file = open('./../phase2/path.pkl', 'rb')
     path = pickle.load(pkl_file)
     pkl_file.close()
 
-    x_coeffs = [1]*len(path)
-    y_coeffs = [1]*len(path)
-    z_coeffs = [1]*len(path)
+    x_coeffs = [0]*len(path)
+    y_coeffs = [0]*len(path)
+    z_coeffs = [0]*len(path)
 
     for i in range(len(path)-40):
         traj = TrajectoryGenerator(path[i], path[(i + 1)], T)
@@ -213,6 +213,3 @@ def main():
 
     quad_sim(x_coeffs, y_coeffs, z_coeffs)
 
-
-if __name__ == "__main__":
-    main()

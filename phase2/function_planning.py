@@ -52,6 +52,7 @@ def draw_figure(obstacle_list, path, size):
 
 
 
+
 def astar(maze, start, end):
     """Returns a list of tuples as a path from the given start to the given end in the given maze"""
     ##draw the picture
@@ -169,4 +170,4 @@ def astar(maze, start, end):
 
             # Add the child to the open list
             open_list.append(child)
-            print('fuccccccadd:%d',child.position)
+            # print('fuccccccadd:%d',child.position)

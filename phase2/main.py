@@ -1,6 +1,7 @@
 import numpy as np
 import io
 import pickle
+import time
 import cProfile
 import re
 import matplotlib.pyplot as plt
@@ -12,10 +13,10 @@ import init_setting
 from init_setting import init_setting
 from init_setting import obstacle
 from function_planning import draw_figure
-
+import navigation2
 
 def main():
-
+    start_t = time.perf_counter()
     filepath = 'SampleEnvironment.txt'
     s = open(filepath).read().replace(':', ';')
 
@@ -27,11 +28,7 @@ def main():
 
     data = np.loadtxt(io.StringIO(s), delimiter=';', dtype='Float64', comments='#', skiprows=2)
 
-    obstacle_list=[]
-    obstacle_exp = obstacle(location=[2, 2, 0], size=[10, 10, 10])
-    obstacle_2 = obstacle(location=[8, 5, 2], size=[10, 2, 15])
-    obstacle_list.append(obstacle_exp)
-    obstacle_list.append(obstacle_2)
+    obstacle_list = []
 
     for i in range(len(data)):
         new_obstacle = obstacle(location=data[i][0:3], size=data[i][3:5])
@@ -41,14 +38,23 @@ def main():
     map = init_setting(end=(20, 20, 10))
     path = astar(map.maze, map.start, map.end)
     # print(path)
-    path_pkl = open('./path2.pkl', 'wb')
+    path_pkl = open('./path.pkl', 'wb')
     pickle.dump(path, path_pkl)
     path_pkl.close()
     print('Pickled the path...')
 
+    end_t = time.perf_counter()
+    elapsed_time = end_t - start_t
     draw_figure(obstacle_list, path, size_map)
 
 
+
+
+
+    print('Done... in', elapsed_time, 'seconds')
+
+    # use the path for navigation
+    navigation2.navigation()
 if __name__ == '__main__':
     main()
-    cProfile.run('main()')
+

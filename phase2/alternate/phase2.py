@@ -1,7 +1,6 @@
-from utils import mapping
+from phase2.alternate import mapping
 import numpy as np
 import io
-import sys
 import time
 
 start_t = time.perf_counter()
