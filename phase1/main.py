@@ -112,7 +112,7 @@ def partB():
 
     arr = input("Enter initial position coordinates, q0, separated by a blank space. (Example : 0 0 0) ")
     q0_3d = [[int(n)] for n in arr.split()] #convert it into list
-    q0_3d = np.array(q0_3d)
+    q0_3d = np.array(  )
 
     arr = input("Enter final vertical position coordinates, qh,  separated by a blank space. (Example : 3 4 5) ")      # enter into the final position like 3 4 5
     qh_3d = [[int(n)] for n in arr.split()]

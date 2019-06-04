@@ -196,7 +196,7 @@ def main():
     Calculates the x, y, z coefficients for the trajectory
     """
 
-    pkl_file = open('./../phase2/path.pkl', 'rb')
+    pkl_file = open('./../phase2/path2.pkl', 'rb')
     path = pickle.load(pkl_file)
     pkl_file.close()
 
