@@ -1,7 +1,8 @@
 """
-Simulate a quadrotor following a 3D trajectory
+Navigate a 3D trajectory
 
-Author: Daniel Ingram (daniel-s-ingram)
+Author: Jean-Bernard Uwineza
+    (with some input from  Daniel Ingram's implementation from GitHub.)
 """
 
 from math import cos, sin
@@ -19,7 +20,7 @@ m = 0.2
 Ixx = 1
 Iyy = 1
 Izz = 1
-T = 15
+T = 2
 
 # Proportional coefficients
 Kp_x = 1
@@ -195,9 +196,6 @@ def main():
     Calculates the x, y, z coefficients for the trajectory
     """
 
-
-   # waypoints = [[-5, -5, 5], [5, -5, 5], [5, 5, 5], [-5, 5, 5]]
-
     pkl_file = open('./../phase2/path.pkl', 'rb')
     path = pickle.load(pkl_file)
     pkl_file.close()
@@ -206,7 +204,7 @@ def main():
     y_coeffs = [1]*len(path)
     z_coeffs = [1]*len(path)
 
-    for i in range(len(path)-1):
+    for i in range(len(path)-40):
         traj = TrajectoryGenerator(path[i], path[(i + 1)], T)
         traj.solve()
         x_coeffs[i] = traj.x_c
