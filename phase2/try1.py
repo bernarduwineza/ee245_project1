@@ -12,10 +12,10 @@ from init_setting import init_setting
 def main():
     obstacle_list=[]
     ## you finish the obstacle_list
-    obstacle=obstacle(location=None, size=None)##
-    obstacle_list.append(obstacle)
+    # obstacle=obstacle(location=None, size=None)##
+    # obstacle_list.append(obstacle)
     ##
-    map=init_setting(obstacle_loc=[2, 2, 0], obstacle_size=[10, 10, 10],end=(20, 20, 0))
+    map=init_setting(end=(20, 20, 0))
     path = astar(map.maze, map.start, map.end)
     print(path)
 
